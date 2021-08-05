@@ -42,20 +42,26 @@ function draw() {
   foodObj.display();
 
   //write code to read fedtime value from the database 
-  database.ref(lastFed);
+fedTime=database.ref('FeedTime');
+  fedTime.on("value",function(data){
+    lastFed=data.val();
+  });
   
  
+ fill(255,255,254);
+  textSize(15);
+
   //write code to display text lastFed time here
   if(lastFed>=12){
-    text("Last fed:"+lastFed+"PM",500,50);
+  text("Last Feed : "+ lastFed % 12 + " PM", 350,30);
   }
 
-  else if(lastFed===0){
+  else if(lastFed==0){
     text("Last fed: 12 AM",500,50);
   }
 
   else{
-    text("Last fed:"+lastFed+"AM",500,50);
+    text("Last fed:"+ "lastFed"+"AM",500,50);
   }
  
   drawSprites();
