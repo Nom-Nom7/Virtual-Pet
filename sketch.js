@@ -5,8 +5,8 @@ var feed,addFood;
 var foodObj;
 
 function preload(){
-sadDog=loadImage("Images/Dog.png");
-happyDog=loadImage("Images/happy dog.png");
+sadDog=loadImage("Dog.png");
+happyDog=loadImage("happy dog.png");
 }
 
 function setup() {
@@ -44,11 +44,11 @@ function draw() {
   fill(255,255,254);
   textSize(15);
   if(lastFed>=12){
-    text("Last Feed : "+ lastFed % 12 + " PM", 350,30);
+    text("Last Fed : "+ lastFed % 12 + " PM", 350,30);
    }else if(lastFed==0){
-     text("Last Feed : 12 AM",350,30);
+     text("Last Fed : 12 AM",350,30);
    }else{
-     text("Last Feed : "+ lastFed + " AM", 350,30);
+     text("Last Fed : "+ lastFed + " AM", 350,30);
    }
  
   drawSprites();
