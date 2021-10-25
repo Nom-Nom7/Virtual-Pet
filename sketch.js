@@ -23,11 +23,11 @@ function setup() {
   dog.scale=0.15;
   
   feed=createButton("Feed the dog");
-  feed.position(700,120);
+  feed.position(700,95);
   feed.mousePressed(feedDog);
 
   addFood=createButton("Add Food");
-  addFood.position(800,120);
+  addFood.position(800,95);
   addFood.mousePressed(addFoods);
 
 }
@@ -44,11 +44,11 @@ function draw() {
   fill(255,255,254);
   textSize(15);
   if(lastFed>=12){
-    text("Last Fed : "+ lastFed % 12 + " PM", 350,30);
+    text("Last Feed : "+ lastFed%12 + " PM", 350,30);
    }else if(lastFed==0){
-     text("Last Fed : 12 AM",350,30);
+     text("Last Feed : 12 AM",350,30);
    }else{
-     text("Last Fed : "+ lastFed + " AM", 350,30);
+     text("Last Feed : "+ lastFed + " AM", 350,30);
    }
  
   drawSprites();
@@ -64,8 +64,14 @@ function readStock(data){
 //function to update food stock and last fed time
 function feedDog(){
   dog.addImage(happyDog);
-
-  foodObj.updateFoodStock(foodObj.getFoodStock()-1);
+  
+  var food_stock_val = foodObj.getFoodStock();
+  if(food_stock_val <= 0){
+      foodObj.updateFoodStock(food_stock_val *0);
+  }else{
+      foodObj.updateFoodStock(food_stock_val -1);
+  }
+  
   database.ref('/').update({
     Food:foodObj.getFoodStock(),
     FeedTime:hour()
@@ -76,6 +82,6 @@ function feedDog(){
 function addFoods(){
   foodS++;
   database.ref('/').update({
-    Food:foodS 
+    Food:foodS
   })
 }
